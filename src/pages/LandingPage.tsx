@@ -92,7 +92,13 @@ const LandingPage: React.FC = () => {
           fullscreen
           className="flex flex-col justify-center items-center h-full"
         >
-          <IonImg src={logo} alt="Skyier" className="w-[12%] m-2 absolute" />
+          <IonImg
+            src={logo}
+            alt="Skyier"
+            className={`w-[12%] m-2 absolute transition-all ${
+              activeSlide !== 2 ? "opacity-100 scale-100" : "opacity-0 scale-50"
+            }`}
+          />
 
           <Slider ref={sliderRef} {...settings} className="flex-1">
             <CarouselSlide1 advanceSlider={advanceSlider} />
