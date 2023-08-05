@@ -18,7 +18,7 @@ const CarouselSlide1 = ({ advanceSlider }) => (
   <div className="p-2 flex flex-col justify-center items-center mt-24 md:mt-20">
     <IonImg src={svgImage} className="w-[90%] md:w-[80%] lg:w-[70%]" />
     <IonText color="primary">
-      <h1 className="text-xl text-center mt-5 font-landing_carousel pl-10 pr-10 md:text-2xl lg:text-3xl">
+      <h1 className="text-2xl text-center mt-5 font-landing_carousel pl-10 pr-10 md:text-2xl lg:text-3xl">
         Create groups and see your friends' location
       </h1>
     </IonText>
@@ -39,7 +39,7 @@ const CarouselSlide2 = ({ advanceSlider }) => (
   <div className="p-2 flex flex-col justify-center items-center mt-24 md:mt-20">
     <IonImg src={svgImage} className="w-[90%] md:w-[80%] lg:w-[70%]" />
     <IonText color="primary">
-      <h1 className="text-xl text-center mt-5 font-landing_carousel pl-10 pr-10 md:text-2xl lg:text-3xl">
+      <h1 className="text-2xl text-center mt-5 font-landing_carousel pl-10 pr-10 md:text-2xl lg:text-3xl">
         Create groups and see your friends' location
       </h1>
     </IonText>
@@ -92,9 +92,7 @@ const LandingPage: React.FC = () => {
           fullscreen
           className="flex flex-col justify-center items-center h-full"
         >
-          {activeSlide !== 2 && (
-            <IonImg src={logo} alt="Skyier" className="w-[12%] m-2 absolute" />
-          )}
+          <IonImg src={logo} alt="Skyier" className="w-[12%] m-2 absolute" />
 
           <Slider ref={sliderRef} {...settings} className="flex-1">
             <CarouselSlide1 advanceSlider={advanceSlider} />
