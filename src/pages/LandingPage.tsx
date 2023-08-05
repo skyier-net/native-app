@@ -13,6 +13,7 @@ import svgImage from "/images/undraw_my_current_location_re_whmt.svg";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { LoginComponent } from "../components/InAppBrowserComponent";
 
 const CarouselSlide1 = ({ advanceSlider }) => (
   <div className="p-2 flex flex-col justify-center items-center mt-24 md:mt-20">
@@ -84,6 +85,8 @@ const LandingPage: React.FC = () => {
   }, []);
 
   const [activeSlide, setActiveSlide] = useState(0);
+  const [signInComponentIsVisible, setSignInComponentIsVisible] =
+    useState(false);
 
   return (
     <IonPage className={isDarkTheme ? "dark-theme" : ""}>
@@ -114,7 +117,13 @@ const LandingPage: React.FC = () => {
                   </h1>
                 </IonText>
                 <div className="mt-8 w-[80%] md:w-1/3 lg:w-1/4">
-                  <IonButton expand="full" shape="round">
+                  <IonButton
+                    expand="full"
+                    shape="round"
+                    onClick={() => {
+                      setSignInComponentIsVisible(true);
+                    }}
+                  >
                     Sign In
                   </IonButton>
                   <IonRow style={{ innerHeight: "10px" }}></IonRow>
