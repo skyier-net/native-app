@@ -46,6 +46,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-react";
 import { ENV } from "./env.dev";
 import { HeaderComponent } from "./components/HeaderComponent";
+import { NotFoundComponent } from "./components/NotFoundComponent";
 
 setupIonicReact();
 
@@ -83,18 +84,21 @@ const App: React.FC = () => (
         colorWarning: getComputedStyle(
           document.documentElement
         ).getPropertyValue("--ion-color-warning"),
+        colorAlphaShade: getComputedStyle(
+          document.documentElement
+        ).getPropertyValue(
+          window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "--ion-color-light"
+            : "--ion-color-dark"
+        ),
       },
     }}
   >
     <IonApp>
       <IonReactRouter>
-        <HeaderComponent />
-        <Route path="/" exact>
-          <SignedOut>
-            <LandingPage />
-          </SignedOut>
-        </Route>
         <SignedIn>
+          <HeaderComponent />
           <Route path="/" exact>
             <Redirect to="/tab1" />
           </Route>
@@ -128,6 +132,11 @@ const App: React.FC = () => (
             </IonTabs>
           </Route>
         </SignedIn>
+        <SignedOut>
+          <Route path="/" exact>
+            <LandingPage />
+          </Route>
+        </SignedOut>
       </IonReactRouter>
     </IonApp>
   </ClerkProvider>
