@@ -24,7 +24,14 @@ export const HeaderComponent = () => {
         </IonButtons>
         <IonTitle>{routeToName.get(router.pathname) ?? ""}</IonTitle>
         <IonButtons slot="end">
-          <UserButton afterSignOutUrl={"/redirectTo" + router.pathname} />
+          <UserButton
+            afterSignOutUrl={
+              "/redirectTo/" + router.pathname.slice(1).replaceAll("/", "_")
+            }
+            signInUrl={
+              "/redirectTo/" + router.pathname.slice(1).replaceAll("/", "_")
+            }
+          />
         </IonButtons>
       </IonToolbar>
     </IonHeader>

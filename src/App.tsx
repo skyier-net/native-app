@@ -133,7 +133,7 @@ const App: React.FC = () => (
           </Route>
         </SignedIn>
         <SignedOut>
-          <Route path={["/", "/redirectTo/:page"]} exact>
+          <Route path={["/", "/redirectTo/:page", "/redirectTo"]} exact>
             <LandingPage />
           </Route>
         </SignedOut>
