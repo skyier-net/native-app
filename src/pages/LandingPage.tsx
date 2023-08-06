@@ -6,6 +6,7 @@ import {
   IonImg,
   IonText,
   IonRow,
+  useIonRouter,
 } from "@ionic/react";
 import logo from "/favicon.png";
 import logo_squared from "/logo.png";
@@ -14,6 +15,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { SignInButton, SignUpButton } from "@clerk/clerk-react";
+import { useLocation } from "react-router";
 
 const CarouselSlide1 = ({ advanceSlider }) => (
   <div className="p-2 flex flex-col justify-center items-center mt-24 md:mt-20">
@@ -61,20 +63,8 @@ const LandingPage: React.FC = () => {
   const sliderRef = useRef(null);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
-  const settings = {
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-
-    afterChange: (currentSlide: number) => {
-      setActiveSlide(currentSlide);
-    },
-  };
-
   const advanceSlider = () => {
-    sliderRef.current.slickNext();
+    (sliderRef!.current! as any).slickNext();
   };
 
   useEffect(() => {
@@ -84,7 +74,25 @@ const LandingPage: React.FC = () => {
     );
   }, []);
 
-  const [activeSlide, setActiveSlide] = useState(0);
+  const route = useLocation();
+  const redirectTo = route.pathname.includes("redirectTo")
+    ? route.pathname.split("/")[2].replaceAll("_", "/")
+    : "";
+
+  const [activeSlide, setActiveSlide] = useState(redirectTo ? 2 : 0);
+
+  const settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    initialSlide: redirectTo ? 2 : 0,
+
+    afterChange: (currentSlide: number) => {
+      setActiveSlide(currentSlide);
+    },
+  };
 
   return (
     <IonPage className={isDarkTheme ? "dark-theme" : ""}>
@@ -115,13 +123,21 @@ const LandingPage: React.FC = () => {
                   </h1>
                 </IonText>
                 <div className="mt-8 w-[80%] md:w-1/3 lg:w-1/4">
-                  <SignInButton mode="modal">
+                  <SignInButton
+                    mode="modal"
+                    afterSignUpUrl={"/" + redirectTo}
+                    afterSignInUrl={"/" + redirectTo}
+                  >
                     <IonButton expand="full" shape="round">
                       Sign In
                     </IonButton>
                   </SignInButton>
                   <IonRow style={{ innerHeight: "10px" }}></IonRow>
-                  <SignUpButton mode="modal">
+                  <SignUpButton
+                    mode="modal"
+                    afterSignUpUrl={"/" + redirectTo}
+                    afterSignInUrl={"/" + redirectTo}
+                  >
                     <IonButton
                       expand="full"
                       shape="round"
