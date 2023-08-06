@@ -79,6 +79,22 @@ const App: React.FC = () => {
       InAppBrowser.create(targetUrl, "_blank", options);
       event.preventDefault(); // Prevent default behavior of anchor click
     }
+
+    // Listen for Clerk's attempt to open a window
+    const openWindowListener = (event: any) => {
+      event.preventDefault(); // Prevent default behavior
+
+      const options =
+        "location=yes,hidden=no,clearcache=yes,clearsessioncache=yes";
+      // Use InAppBrowser (or Capacitor's Browser plugin) to open the link
+      InAppBrowser.create(event.detail.url, "_blank", options);
+    };
+
+    window.addEventListener("clerk.open.window", openWindowListener);
+
+    return () => {
+      window.removeEventListener("clerk.open.window", openWindowListener);
+    };
   };
 
   return (
