@@ -3,11 +3,11 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
-  useIonRouter,
-  IonBackButton,
   IonButtons,
+  IonImg,
 } from "@ionic/react";
 import { useLocation } from "react-router";
+import icon from "/favicon.png";
 
 export const HeaderComponent = () => {
   const routeToName = new Map();
@@ -20,7 +20,7 @@ export const HeaderComponent = () => {
     <IonHeader>
       <IonToolbar>
         <IonButtons slot="start">
-          <IonBackButton defaultHref="/"></IonBackButton>
+          <IonImg src={icon} className="h-6" />
         </IonButtons>
         <IonTitle>{routeToName.get(router.pathname) ?? ""}</IonTitle>
         <IonButtons slot="end">
