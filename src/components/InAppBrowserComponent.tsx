@@ -1,8 +1,4 @@
-import {
-  InAppBrowser,
-  InAppBrowserEvent,
-  InAppBrowserObject,
-} from "@awesome-cordova-plugins/in-app-browser";
+import { InAppBrowser } from "@awesome-cordova-plugins/in-app-browser";
 import { SIGN_IN_URL } from "../properties";
 import { Observable } from "rxjs";
 

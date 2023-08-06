@@ -54,11 +54,33 @@ setupIonicReact();
 
 const App: React.FC = () => {
   useEffect(() => {
-    document.querySelector("a")?.addEventListener("click", (e) => {
-      e.preventDefault();
-      InAppBrowser.create((e.target as any)?.url, "_blank");
-    });
-  });
+    // Add click event listeners to all anchor links in the document
+    const anchorLinks = document.getElementsByTagName("a");
+    for (let i = 0; i < anchorLinks.length; i++) {
+      anchorLinks[i].addEventListener("click", handleAnchorClick);
+    }
+
+    // Clean up the event listeners when the component unmounts
+    return () => {
+      for (let i = 0; i < anchorLinks.length; i++) {
+        anchorLinks[i].removeEventListener("click", handleAnchorClick);
+      }
+    };
+  }, []);
+
+  const handleAnchorClick = (event: any) => {
+    const targetUrl = event.target.href;
+
+    if (targetUrl.startsWith("http") || targetUrl.startsWith("https")) {
+      // External link, open in in-app browser
+      console.log("NIGGAS IN PARIS");
+      const options =
+        "location=yes,hidden=no,clearcache=yes,clearsessioncache=yes";
+      InAppBrowser.create(targetUrl, "_blank", options);
+      event.preventDefault(); // Prevent default behavior of anchor click
+    }
+  };
+
   return (
     <ClerkProvider
       publishableKey={ENV.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
