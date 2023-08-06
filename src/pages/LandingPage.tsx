@@ -78,7 +78,7 @@ const LandingPage: React.FC = () => {
   const redirectTo = route.pathname.includes("redirectTo")
     ? route.pathname.split("/").length > 2
       ? route.pathname.split("/")[2].replaceAll("_", "/")
-      : "/tab1"
+      : "tab1"
     : "";
 
   const [activeSlide, setActiveSlide] = useState(redirectTo ? 2 : 0);
