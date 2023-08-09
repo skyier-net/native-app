@@ -92,6 +92,12 @@ const App: React.FC = () => {
 
     window.addEventListener("clerk.open.window", openWindowListener);
 
+    window.addEventListener("beforeunload", (event: BeforeUnloadEvent) => {
+      console.log("WHO S THAT GIGGA NIGGA");
+      console.log(event);
+      alert("QHO TF IS GIGGA NIGGA");
+    });
+
     return () => {
       window.removeEventListener("clerk.open.window", openWindowListener);
     };
