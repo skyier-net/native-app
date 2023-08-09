@@ -46,62 +46,15 @@ import "slick-carousel/slick/slick-theme.css";
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-react";
 import { ENV } from "./env.dev";
 import { HeaderComponent } from "./components/HeaderComponent";
-import { NotFoundComponent } from "./components/NotFoundComponent";
-import { useEffect } from "react";
-import { InAppBrowser } from "@awesome-cordova-plugins/in-app-browser";
+import { Capacitor } from "@capacitor/core";
+import { Browser } from "@capacitor/browser";
 
 setupIonicReact();
 
 const App: React.FC = () => {
-  useEffect(() => {
-    // Add click event listeners to all anchor links in the document
-    const anchorLinks = document.getElementsByTagName("a");
-    for (let i = 0; i < anchorLinks.length; i++) {
-      anchorLinks[i].addEventListener("click", handleAnchorClick);
-    }
-
-    // Clean up the event listeners when the component unmounts
-    return () => {
-      for (let i = 0; i < anchorLinks.length; i++) {
-        anchorLinks[i].removeEventListener("click", handleAnchorClick);
-      }
-    };
-  }, []);
-
-  const handleAnchorClick = (event: any) => {
-    const targetUrl = event.target.href;
-
-    if (targetUrl.startsWith("http") || targetUrl.startsWith("https")) {
-      // External link, open in in-app browser
-      console.log("NIGGAS IN PARIS");
-      const options =
-        "location=yes,hidden=no,clearcache=yes,clearsessioncache=yes";
-      InAppBrowser.create(targetUrl, "_blank", options);
-      event.preventDefault(); // Prevent default behavior of anchor click
-    }
-
-    // Listen for Clerk's attempt to open a window
-    const openWindowListener = (event: any) => {
-      event.preventDefault(); // Prevent default behavior
-
-      const options =
-        "location=yes,hidden=no,clearcache=yes,clearsessioncache=yes";
-      // Use InAppBrowser (or Capacitor's Browser plugin) to open the link
-      InAppBrowser.create(event.detail.url, "_blank", options);
-    };
-
-    window.addEventListener("clerk.open.window", openWindowListener);
-
-    window.addEventListener("beforeunload", (event: BeforeUnloadEvent) => {
-      console.log("WHO S THAT GIGGA NIGGA");
-      console.log(event);
-      alert("QHO TF IS GIGGA NIGGA");
-    });
-
-    return () => {
-      window.removeEventListener("clerk.open.window", openWindowListener);
-    };
-  };
+  if (Capacitor.isNative) {
+    window.open = (async (url: string) => Browser.open({ url })) as any;
+  }
 
   return (
     <ClerkProvider
