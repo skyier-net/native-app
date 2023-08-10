@@ -53,7 +53,13 @@ setupIonicReact();
 
 const App: React.FC = () => {
   if (Capacitor.isNative) {
-    window.open = (async (url: string) => Browser.open({ url })) as any;
+    window.open = (async (url: string) =>
+      Browser.open({
+        url,
+        presentationStyle: "popover",
+        toolbarColor: "#fffff",
+        height: 50,
+      })) as any;
   }
 
   return (
