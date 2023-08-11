@@ -4,6 +4,7 @@ import {
   IonHeader,
   IonIcon,
   IonLabel,
+  IonLoading,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
@@ -43,11 +44,17 @@ import "./theme/tailwind.css";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-react";
+import {
+  ClerkLoading,
+  ClerkProvider,
+  SignedIn,
+  SignedOut,
+} from "@clerk/clerk-react";
 import { ENV } from "./env.dev";
 import { HeaderComponent } from "./components/HeaderComponent";
 import { Capacitor } from "@capacitor/core";
 import { Browser } from "@capacitor/browser";
+import { LoadingComponent } from "./components/LoadingComponent";
 
 setupIonicReact();
 
@@ -111,6 +118,9 @@ const App: React.FC = () => {
     >
       <IonApp>
         <IonReactRouter>
+          <ClerkLoading>
+            <LoadingComponent />
+          </ClerkLoading>
           <SignedIn>
             <HeaderComponent />
             <Route path="/" exact>
