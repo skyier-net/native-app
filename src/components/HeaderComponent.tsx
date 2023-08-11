@@ -20,7 +20,7 @@ export const HeaderComponent = () => {
     <IonHeader>
       <IonToolbar>
         <IonButtons slot="start">
-          <IonImg src={icon} className="h-6" />
+          <IonImg src={icon} className="w-7" />
         </IonButtons>
         <IonTitle>{routeToName.get(router.pathname) ?? ""}</IonTitle>
         <IonButtons slot="end">
