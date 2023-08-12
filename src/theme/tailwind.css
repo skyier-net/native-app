@@ -14,3 +14,7 @@
 .slick-dots li button:before{
     margin-top: -20px;
 }
+
+input:focus {
+    caret-color: #2dd36f; /* Променя цвета на курсора на червено */
+}

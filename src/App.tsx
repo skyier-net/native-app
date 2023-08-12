@@ -15,10 +15,10 @@ import {
   useIonRouter,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { ellipse, square, triangle } from "ionicons/icons";
-import Tab1 from "./pages/app/Tab1";
-import Tab2 from "./pages/app/Tab2";
-import Tab3 from "./pages/app/Tab3";
+import { add, home, compass } from "ionicons/icons";
+import Home from "./pages/app/Home";
+import Create from "./pages/app/Create";
+import Explore from "./pages/app/Explore";
 
 import LandingPage from "./pages/LandingPage";
 
@@ -124,33 +124,32 @@ const App: React.FC = () => {
           <SignedIn>
             <HeaderComponent />
             <Route path="/" exact>
-              <Redirect to="/tab1" />
+              <Redirect to="/home" />
             </Route>
-            <Route path={["/tab1", "/tab2", "/tab3"]}>
+            <Route path={["/home", "/create", "/explore"]}>
               <IonTabs>
                 <IonRouterOutlet>
-                  <Route path="/tab1" exact>
-                    <Tab1 />
+                  <Route path="/home" exact>
+                    <Home />
                   </Route>
-                  <Route path="/tab2" exact>
-                    <Tab2 />
+                  <Route path="/create" exact>
+                    <Create />
                   </Route>
-                  <Route path="/tab3" exact>
-                    <Tab3 />
+                  <Route path="/explore" exact>
+                    <Explore />
                   </Route>
                 </IonRouterOutlet>
                 <IonTabBar slot="bottom">
-                  <IonTabButton tab="tab1" href="/tab1">
-                    <IonIcon aria-hidden="true" icon={triangle} />
-                    <IonLabel>Tab 1</IonLabel>
+                  <IonTabButton tab="home" href="/home">
+                    <IonIcon aria-hidden="true" icon={home} />
+                    <IonLabel>Home</IonLabel>
                   </IonTabButton>
-                  <IonTabButton tab="tab2" href="/tab2">
-                    <IonIcon aria-hidden="true" icon={ellipse} />
-                    <IonLabel>Tab 2</IonLabel>
+                  <IonTabButton tab="create" href="/create">
+                    <IonIcon aria-hidden="true" icon={add} />
                   </IonTabButton>
-                  <IonTabButton tab="tab3" href="/tab3">
-                    <IonIcon aria-hidden="true" icon={square} />
-                    <IonLabel>Tab 3</IonLabel>
+                  <IonTabButton tab="explore" href="/explore">
+                    <IonIcon aria-hidden="true" icon={compass} />
+                    <IonLabel>Explore</IonLabel>
                   </IonTabButton>
                 </IonTabBar>
               </IonTabs>
