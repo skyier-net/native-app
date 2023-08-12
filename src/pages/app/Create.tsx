@@ -49,7 +49,7 @@ const Create: React.FC = () => {
   };
 
   return (
-    <IonPage class="mt-12">
+    <IonPage className="pt-[90px]">
       <IonContent fullscreen>
         <IonItem>
           <IonLabel>Title</IonLabel>
